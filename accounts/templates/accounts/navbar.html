@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">CRM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      {% with request.resolver_match.url_name as url_name %}
+      <ul class="navbar-nav ml-auto">
+      {% if request.user.is_staff %}
+        <li class="{% if url_name == 'home' %}active{% endif %} nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
+        </li>
+        <li class="{% if url_name == 'products' %}active{% endif %} nav-item">
+          <a class="nav-link" href="{% url 'products' %}">Products</a>
+        </li>
+        {% endif %}
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hello, {{ request.user }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'profile' %}">Manage Profile</a>
+          <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+        </div>
+      </li>
+      </ul>
+      {% endwith %}
+    </div>
+  </div>
+</nav>

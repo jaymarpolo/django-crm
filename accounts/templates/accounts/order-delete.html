@@ -1,0 +1,16 @@
+{% extends 'accounts/main.html' %} {% block content %}
+<div class="container text-center" style="margin-top: 75px">
+  <h4 class="mb-5">Are you sure you want to delete this?</h4>
+  <h6>Customer: {{ order.customer.name }}</h6>
+  <h6>Product: {{ order.product.name }}</h6>
+  <h6>Date Ordered: {{ order.created }}</h6>
+  <h6 class="mb-5">Status: {{ order.status }}</h6>
+  <div class="container">
+    <form method="post" style="margin: 0 300px">
+      {% csrf_token %}
+      <button class="btn btn-danger btn-block" type="submit">Delete</button>
+      <a class="btn btn-warning btn-block" href="{% url 'home' %}">Cancel</a>
+    </form>
+  </div>
+  {% endblock %}
+</div>
